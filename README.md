@@ -1,0 +1,1 @@
+# docker-private-reg-example
