@@ -39,11 +39,22 @@ After logging into the Nexus UI, navigate to the **"Settings"** section in withi
 
 ---
 
-## **4. Push Docker Images to Nexus**
+## **4. Enable Docker Private Reg**
+
+Since our docker registry (nexus) is not secured (http and not https) we need to enable it in docker engine.<br>
+1. Open docker desktop
+2. Click on "Settings".
+3. Click on "Docker Engine".
+4. Add "localhost:8082" to "insecure-registries"
+5. click "Apply & restart"
+
+---
+
+## **5. Push Docker Images to Nexus**
 
 Now you can push Docker images to your Nexus Docker repository. Follow these steps:
 
-### 4.1 Tag the Image
+### 5.1 Tag the Image
 
 Tag your Docker image to match the Nexus repository URL:
 
@@ -51,7 +62,7 @@ Tag your Docker image to match the Nexus repository URL:
 docker tag service1:1.0 localhost:8082/service1:1.0
 ```
 
-### 4.2 Log in to Nexus Docker Repository
+### 5.2 Log in to Nexus Docker Repository
 
 Log in to the Nexus repository using Docker CLI:
 
@@ -63,7 +74,7 @@ Enter the following credentials:
 - **Username:** `admin`
 - **Password:** `admin123`
 
-### 4.3 Push the Image
+### 5.3 Push the Image
 
 Now, you can push your Docker image to the repository:
 
@@ -73,7 +84,7 @@ docker push localhost:8082/service1:1.0
 
 ---
 
-## **5. Remove Local Image**
+## **6. Remove Local Image**
 
 Delete the local image, so we can simulate pulling from private registry
 ```bash
@@ -82,7 +93,7 @@ docker rmi localhost:8082/service1:1.0 service1:1.0
 
 ---
 
-## **6. Run `service1` Docker Compose**
+## **7. Run `service1` Docker Compose**
 
 Run `service1` docker compose file, this will pull the image from the local nexus registry and run it
 ```bash
